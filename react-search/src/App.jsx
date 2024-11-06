@@ -1,42 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import "./App.css";
-import axios from "axios";
+import useSearchMovie from "./hooks/useSearchMovie";
 
 function App() {
   const [query, setQuery] = useState("");
-  const [movies, setMovies] = useState([]);
+  const { results, loading, error } = useSearchMovie(query);
 
   const searchHandler = (e) => {
     setQuery(e.target.value);
   };
-
-  const fetchMovies = async (searchQuery) => {
-    const API_KEY = "5c21622dcb75a52ba1a23c16efdd72ad";
-    const URL = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${searchQuery}`;
-
-    try {
-      const movies = await axios.get(URL);
-      console.log(movies.data.results)
-      return movies.data.results;
-    } catch (err) {
-      console.log(err);
-      return [];
-    }
-  };
-
-  useEffect(() => {
-    const getMovies = async () => {
-      try {
-        if (query.length > 2) {
-          const results = await fetchMovies(query);
-          setMovies(results);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    getMovies();
-  }, [query]);
 
   return (
     <>
@@ -47,8 +19,10 @@ function App() {
         value={query}
         onChange={searchHandler}
       ></input>
+      {loading && <p>Now Loading ...</p>}
+      {error && <p>Error</p>}
       <ul>
-        {movies.map((movie) => {
+        {results.map((movie) => {
           return (
             <li key={movie.id}>
               {movie.title} ({movie.release_date})
