@@ -1,34 +1,29 @@
 {
   "incomes": [
     {
-      "id": 1,
-      "amount": 10000000,
-      "name": "salary"
+      "amount": "1000000",
+      "name": "Gaji pertamax bossqu",
+      "id": "1"
     },
     {
-      "id": "7bf5",
-      "amount": 1000000,
-      "name": "Gaji pertamax"
-    },
-    {
-      "id": "ad69",
+      "id": "2",
       "amount": 500000,
       "name": "Gaji live tiktok"
     }
   ],
   "expenses": [
     {
-      "id": 1,
+      "id": "1",
       "amount": 1500000,
       "name": "rent"
     },
     {
-      "id": "e8f4",
+      "id": "2",
       "amount": 1000,
       "name": "tes"
     },
     {
-      "id": "3bb1",
+      "id": "3",
       "amount": 500000,
       "name": "bayar karyawan"
     }

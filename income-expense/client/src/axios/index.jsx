@@ -77,4 +77,104 @@ const addExpense = async (expense, cb) => {
   }
 };
 
-export { getIncomes, getExpenses, addIncome, addExpense };
+const deleteIncome = async (id) => {
+  try {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await axios.delete(`${url}incomes/${id}`);
+
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+      }
+    });
+  } catch (err) {
+    Swal.fire({
+      title: "Delete Error",
+      text: err.message,
+      icon: "error",
+    });
+  }
+};
+
+const deleteExpense = async (id) => {
+  try {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        await axios.delete(`${url}expenses/${id}`);
+
+        Swal.fire({
+          title: "Deleted!",
+          text: "Your file has been deleted.",
+          icon: "success",
+        });
+      }
+    });
+  } catch (err) {
+    Swal.fire({
+      title: "Delete Error",
+      text: err.message,
+      icon: "error",
+    });
+  }
+};
+
+const getIncomeById = async (id, cb) => {
+  try {
+    const result = await axios.get(`${url}incomes/${id}`);
+    cb(result.data);
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+const editIncome = async (id, amount, name) => {
+  try {
+    await axios({
+      method: "PUT",
+      url: `${url}incomes/${id}`,
+      data: {
+        amount,
+        name,
+      },
+
+    });
+    
+    Swal.fire({
+      title: "Income Updated",
+      text: "Income has been updated",
+      icon: "success",
+    })
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export {
+  getIncomes,
+  getExpenses,
+  addIncome,
+  addExpense,
+  deleteIncome,
+  deleteExpense,
+  getIncomeById,
+  editIncome,
+};
