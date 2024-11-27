@@ -40,7 +40,6 @@ function MainContent() {
   return (
     <div className="container">
       <div className="col-6 mx-auto text-center">
-        <hr />
         <div className="mb-3">
           <input
             onChange={(e) => setName(e.target.value)}
